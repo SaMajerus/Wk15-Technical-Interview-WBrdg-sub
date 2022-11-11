@@ -1,0 +1,55 @@
+//function or alg that determines if all letters of a string are unique 
+//must return a boolean-type variable 
+//may not convert string to array, or use array methods. 
+
+//const input = "hello";
+//output = false; 
+//Language: JavaScript
+
+
+let db = []; 
+
+const lettersAreUnique = (str) => {
+//Tally number of times a given letter occurs 
+	if(!(typeof str === 'string')){
+  	return "invalid input, try again."; 
+  }
+  
+  let i = 0; 
+  while(i < str.length){
+  	if(db.length === 0){
+    	db.push({name: str[0], tally: 1}); 
+    } else {
+    	let j = 0; 
+      let foundEntry = false; 
+      while(j < db.length){
+      	if(db[j].name === str[0]){
+          db[j].tally += 1; 
+          foundEntry = true; 
+          break; //exit while loop early 
+        } //Else 
+        j++; 
+      }
+      
+      if(foundEntry === false){
+      	db.push({name: str[0], tally: 1});
+      }
+    }
+    i++; 
+  }
+  
+  let retval = true; 
+  let k = 0; 
+  
+  while(k < db.length){
+  	if(db[k].tally > 1){
+    	return false;
+    }
+  }
+  
+  return true; 
+}
+
+console.log(lettersAreUnique("hello")); 
+console.log(lettersAreUnique("copyright")); 
+console.log(lettersAreUnique("leedleleedleleedle")); 
